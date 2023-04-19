@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Unit Tests') {
             steps {
-               sh 'docker-compose exec web pytest .'
+               sh 'docker-compose exec -i web pytest .'
             }
         }
         stage('SonarQube Analysis') {

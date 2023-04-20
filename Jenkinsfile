@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
-        SONAR_LOGIN = credentials('sonar-jenkins')
+        //SONAR_LOGIN = credentials('sonar-jenkins')
     }
     stages {
         
@@ -22,13 +22,20 @@ pipeline {
                sh 'docker-compose exec -i web pytest .'
             }
         }
-        stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh "mvn sonar:sonar -Dsonar.host.url=http://192.168.19.128:9000 -Dsonar.login=${env.SONAR_LOGIN}"
-                }
-            }
+           stage('SonarQube analysis') {
+        steps{
+        withSonarQubeEnv('sonarqube-8.9.7') { 
+        sh "mvn sonar:sonar"
+    }
         }
+        }
+    //    stage('SonarQube Analysis') {
+      //      steps {
+        //        withSonarQubeEnv('SonarQube') {
+          //          sh "mvn sonar:sonar -Dsonar.host.url=http://192.168.19.128:9000 -Dsonar.login=${env.SONAR_LOGIN}"
+            //    }
+            //}
+        //}
         stage('Docker login') {
             agent any
             steps {

@@ -12,11 +12,11 @@ pipeline {
             }
         }
         
-        stage('Build') {
+        /*stage('Build') {
             steps {
                 sh "docker build -t soulaymendocker123/fastapi-crud:latest ."
             }
-        }
+        }*/
       stage('Unit Tests') {
             steps {
               
@@ -31,7 +31,7 @@ pipeline {
     }
         }
            }
-        stage('Docker login') {
+        /*stage('Docker login') {
             agent any
             steps {
                 sh 'echo "login Docker ...."'
@@ -42,6 +42,6 @@ pipeline {
             steps {
                 sh "docker push soulaymendocker123/fastapi-crud:latest"
             }
-        }
+        }*/
     }
 }

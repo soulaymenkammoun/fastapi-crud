@@ -34,7 +34,7 @@ pipeline {
         //sh "mvn sonar:sonar"
     }
         }
-               ]
+           }
         
     //    stage('SonarQube Analysis') {
       //      steps {

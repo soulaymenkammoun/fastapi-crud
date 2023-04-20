@@ -30,7 +30,7 @@ pipeline {
            stage('SonarQube analysis') {
         steps{
         withSonarQubeEnv('sonarqube-8.9.7') { 
-            sh 'export PATH="$PATH:/home/SonarQube/sonar-scanner-4.6.0.2311-linux/bin"; sonar-scanner'
+            sh 'export PATH="$PATH:/home/soulaymen/SonarQube/sonar-scanner-4.6.0.2311-linux/bin"; sonar-scanner'
         //sh "mvn sonar:sonar"
     }
         }

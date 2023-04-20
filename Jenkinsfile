@@ -19,8 +19,8 @@ pipeline {
         }
       stage('Unit Tests') {
             steps {
-              sh   'python3 -m pytest'
-               //sh 'docker-compose exec -i web pytest .'
+              
+              sh 'docker-compose exec  web pytest .'
             }
         } 
         

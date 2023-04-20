@@ -17,11 +17,24 @@ pipeline {
                 sh "docker build -t soulaymendocker123/fastapi-crud:latest ."
             }
         }
-        stage('Unit Tests') {
+      /*  stage('Unit Tests') {
             steps {
                sh 'docker-compose exec -i web pytest .'
             }
+        } */
+        
+           stage('Unit Tests') {
+            steps {
+               sh 'docker-compose run app sh -c "pytest /src/tests --cov=app --cov-report=xml"'
+            }
+            post {
+                always {
+                    junit 'test_main.py/**/*.xml'
+                }
+            }
         }
+        
+        
            stage('SonarQube analysis') {
         steps{
         withSonarQubeEnv('sonarqube-8.9.7') { 

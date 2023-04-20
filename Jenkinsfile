@@ -23,8 +23,14 @@ pipeline {
               sh 'docker-compose exec -T web pytest .'
             }
         } 
-        
-          
+
+           stage('SonarQube analysis') {
+        steps{
+        withSonarQubeEnv('sonarqube-8.9.7') { 
+            sh 'export PATH="$PATH:/home/soulaymen/SonarQube/sonar-scanner-4.6.0.2311-linux/bin"; sonar-scanner -Dsonar.projectKey=d42eea36dc03ec0f2d8f64f5517e980100d97878'
+    }
+        }
+           }
         stage('Docker login') {
             agent any
             steps {
@@ -37,14 +43,5 @@ pipeline {
                 sh "docker push soulaymendocker123/fastapi-crud:latest"
             }
         }
-        
-           stage('SonarQube analysis') {
-        steps{
-        withSonarQubeEnv('sonarqube-8.9.7') { 
-            sh 'export PATH="$PATH:/home/soulaymen/SonarQube/sonar-scanner-4.6.0.2311-linux/bin"; sonar-scanner -Dsonar.projectKey=d42eea36dc03ec0f2d8f64f5517e980100d97878'
-        //sh "mvn sonar:sonar"
-    }
-        }
-           }
     }
 }

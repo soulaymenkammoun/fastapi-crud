@@ -25,24 +25,6 @@ pipeline {
         } 
         
           
-        
-        
-           stage('SonarQube analysis') {
-        steps{
-        withSonarQubeEnv('sonarqube-8.9.7') { 
-            sh 'export PATH="$PATH:/home/soulaymen/SonarQube/sonar-scanner-4.6.0.2311-linux/bin"; sonar-scanner -Dsonar.projectKey=d42eea36dc03ec0f2d8f64f5517e980100d97878'
-        //sh "mvn sonar:sonar"
-    }
-        }
-           }
-        
-    //    stage('SonarQube Analysis') {
-      //      steps {
-        //        withSonarQubeEnv('SonarQube') {
-          //          sh "mvn sonar:sonar -Dsonar.host.url=http://192.168.19.128:9000 -Dsonar.login=${env.SONAR_LOGIN}"
-            //    }
-            //}
-        //}
         stage('Docker login') {
             agent any
             steps {
@@ -55,5 +37,14 @@ pipeline {
                 sh "docker push soulaymendocker123/fastapi-crud:latest"
             }
         }
+        
+           stage('SonarQube analysis') {
+        steps{
+        withSonarQubeEnv('sonarqube-8.9.7') { 
+            sh 'export PATH="$PATH:/home/soulaymen/SonarQube/sonar-scanner-4.6.0.2311-linux/bin"; sonar-scanner -Dsonar.projectKey=d42eea36dc03ec0f2d8f64f5517e980100d97878'
+        //sh "mvn sonar:sonar"
+    }
+        }
+           }
     }
 }

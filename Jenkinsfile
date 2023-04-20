@@ -27,14 +27,14 @@ pipeline {
           
         
         
-          /* stage('SonarQube analysis') {
+           stage('SonarQube analysis') {
         steps{
         withSonarQubeEnv('sonarqube-8.9.7') { 
             sh 'export PATH="$PATH:/var/lib/jenkins/workspace/fast-crud/sonar-scanner.properties"; sonar-scanner'
         //sh "mvn sonar:sonar"
     }
         }
-        }*/
+        
     //    stage('SonarQube Analysis') {
       //      steps {
         //        withSonarQubeEnv('SonarQube') {
